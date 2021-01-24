@@ -26,6 +26,7 @@ namespace FindEverything
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(FindEverythingPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideToolWindow(typeof(SearchWindow))]
     public sealed class FindEverythingPackage : AsyncPackage
     {
         /// <summary>
@@ -48,6 +49,7 @@ namespace FindEverything
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await FindEverythingCommand.InitializeAsync(this);
+            await SearchWindowCommand.InitializeAsync(this);
         }
 
         #endregion
